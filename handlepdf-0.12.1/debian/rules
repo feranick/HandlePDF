@@ -1,0 +1,27 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+include /usr/share/quilt/quilt.make
+
+build: build-stamp
+build-stamp: $(QUILT_STAMPFN)
+	
+	dh build
+	touch $@
+
+clean: 
+	dh $@
+	
+binary-arch:
+
+binary-indep: build
+	dh $@ --before dh_auto_install
+	dh $@ --after dh_auto_install --before dh_installdocs
+	dh_installdocs README
+	dh $@ --after dh_installdocs
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary

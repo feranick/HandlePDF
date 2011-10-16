@@ -1,0 +1,24 @@
+Files: debian/*
+Copyright: © 2007-2008, David Paleino <d.paleino@gmail.com>
+           © 2005, Daniel Holbach <dh@mailempfang.de>
+License: GPL-3+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+Files: *
+Copyright: © 2004-2010, Nicola Ferralis <feranick@hotmail.com>
+License: GPL-3+ | Artistic
+ This package is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+ ---
+ THIS PACKAGE IS PROVIDED "AS IS" AND WITHOUT ANY EXPRESS OR IMPLIED 
+ WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES 
+ OF MERCHANTIBILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+ 
+On Debian systems, the complete text of the licenses can be found in:
+Artistic `/usr/share/common-licenses/Artistic'
+GPL `/usr/share/common-licenses/GPL'

@@ -1,0 +1,282 @@
+#!/bin/bash
+# By Nicola Ferralis - 05082010
+echo
+echo "Manipulate multiple PDF files"
+echo
+echo "1. Merge PDF files		2. Add files to a PDF"	
+echo "3. Extract pages from PDF 	4. Save as jpg"
+echo "5. Convert PDF to Grayscale	6. Reduce size PDF"
+echo "7. Optimize PDF			8. Custom gs device"
+echo "9. Rotate PDF			10. Add password to pdf"
+echo "11. Split PDF in single pages	12. Convert images into pdf"
+echo "13. Encrypt and protect		14. About"
+echo
+echo "0. Exit"
+
+read TYPE
+
+if [ "$TYPE" = "1" ]; then
+	echo
+	echo "Name output file (no extension): "
+	read OUTFILE
+	echo "Manual (1) or Automatic (2)"
+	read TYPE2
+	if [ "$TYPE2" = "1" ]; then
+ 
+		echo "Name input files (and extensions) with space between them:"
+		read INFILE
+	
+		echo
+		echo Merging $INFILE into $OUTFILE.pdf
+		gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOUTPUTFILE=$OUTFILE.pdf $INFILE
+
+	elif [ "$TYPE2" = "2" ]; then
+		touch $OUTFILE.pdf
+		pathfiles=./
+		TMP=tmp
+		for i in $( ls $pathfiles );
+		do
+
+		if [ "${i##*.}" = "pdf" ]; then
+			if [ "$i" != $OUTFILE.pdf ]; then
+			echo "Adding file" $i "to" $OUTFILE.pdf
+			gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOUTPUTFILE=$TMP $OUTFILE.pdf $i
+			mv $TMP $OUTFILE.pdf
+			fi
+		fi	
+		done
+	fi
+	echo "Done!"
+
+elif [ "$TYPE" = "2" ]; then
+	echo	
+	echo "Name PDF file to which you want to add other PDF files (no extension):"
+	read OUTFILE
+	echo "Name input PDF files (with extension) to add, with space between them:"
+	read INFILE
+	echo
+	echo Adding $INFILE to $OUTFILE.pdf
+	TMP=tmp
+	gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOUTPUTFILE=$TMP $OUTFILE.pdf $INFILE
+	mv $TMP $OUTFILE.pdf
+	echo Done!
+
+elif [ "$TYPE" = "3" ]; then
+	echo	
+	echo "Name input file (no extension):"
+	read INFILE
+	echo First page:
+	read FIRST
+	echo Last page:
+	read LAST
+	echo
+	echo Extracting pages: $FIRST to $LAST of $INFILE.pdf into $INFILE.$FIRST-$LAST.pdf
+	gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dFirstPage=$FIRST -dLastPage=$LAST -sOUTPUTFILE=$INFILE.$FIRST-$LAST.pdf $INFILE.pdf
+	echo Done!
+
+elif [ "$TYPE" = "4" ]; then
+	echo	
+	echo "Name input file (no extension):"
+	read INFILE
+	echo "Page to extract:"
+	read FIRST
+	echo "Resolution (suggested: 300dpi):"
+	read RES
+	echo 
+	echo Converting page $FIRST of $INFILE.pdf into $INFILE.page$FIRST.$RES-dpi.jpg at $RES dpi
+	gs -q -sDEVICE=jpeg -dBATCH -dNOPAUSE -dFirstPage=$FIRST -dLastPage=$FIRST -r$RES -sOutputFile=$INFILE.page$FIRST.$RES-dpi.jpg $INFILE.pdf
+	echo Done!
+
+elif [ "$TYPE" = "5" ]; then
+	echo	
+	echo "Name input files (no extension):"
+	read INFILE
+	echo
+	echo Converting $INFILE.pdf to Grayscale
+	gs -sOutputFile=$INFILE.BW.pdf -sDEVICE=pdfwrite -sColorConversionStrategy=Gray -dProcessColorModel=/DeviceGray -dCompatibilityLevel=1.4 -dNOPAUSE -dBATCH $INFILE.pdf 
+	echo "Done!"
+
+
+elif [ "$TYPE" = "6" ]; then
+	echo	
+	echo "Manual (1) or Automatic (2)"
+	read TYPE2
+	if [ "$TYPE2" = "1" ]; then
+		echo "Name input file (no extension):"
+		read INFILE
+		echo
+		echo Reducing size of $INFILE.pdf into $INFILE.red.pdf
+		gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOUTPUTFILE=$INFILE.red.pdf $INFILE.pdf
+	
+
+	elif [ "$TYPE2" = "2" ]; then		
+		pathfiles=./
+		for i in $( ls $pathfiles );
+		do
+		if [ "${i##*.}" = "pdf" ]; then
+		tmp=$(echo $i | sed s/pdf/red.pdf/g)
+		echo Reducing size of $i into $tmp
+		gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOUTPUTFILE=$tmp $i	
+		fi
+		done
+	fi
+	echo Done!
+
+elif [ "$TYPE" = "7" ]; then
+	echo	
+	echo "Manual (1) or Automatic (2)"
+	read TYPE2
+	if [ "$TYPE2" = "1" ]; then
+		echo "Name input file (no extension):"
+		read INFILE
+		echo
+		echo Optimizing $INFILE.pdf into $INFILE.opt.pdf
+		pdfopt $INFILE.pdf $INFILE.opt.pdf
+
+	elif [ "$TYPE2" = "2" ]; then		
+		pathfiles=./
+		for i in $( ls $pathfiles );
+		do
+		if [ "${i##*.}" = "pdf" ]; then
+		tmp=$(echo $i | sed s/pdf/opt.pdf/g)
+		echo Optimizing $i into $tmp
+		pdfopt $i $tmp	
+		fi
+		done
+	fi
+	echo Done!
+
+
+elif [ "$TYPE" = "8" ]; then
+	echo
+	echo "Would you like to see the available gs devices? (1: yes  else: no)"
+	read TYPE2
+	if [ "$TYPE2" = 1 ]; then
+ 		gs -h
+	fi
+	echo "Device: "
+	read DEV
+	echo "Name input file (no extension):"
+	read INFILE
+	echo "Name output file (no extension): "
+	echo "Page to extract:"
+	read FIRST
+	echo "Resolution (suggested: 300dpi):"
+	read RES
+	echo 
+	echo Converting page $FIRST of $INFILE.pdf into $OUTFILE.jpg at $RES dpi
+	gs -q -sDEVICE=$DEV -dBATCH -dNOPAUSE -dFirstPage=$FIRST -dLastPage=$FIRST -r$RES -sOutputFile=$OUTFILE $INFILE.pdf
+	echo Done!
+
+
+elif [ "$TYPE" = "9" ]; then
+	echo
+	echo "Name input file (no extension):"
+	read INFILE
+	echo "Page Range:   1: All;   2: Specific range"
+	read RANGE
+	if [ "$RANGE" = 1 ]; then
+ 		RAN="1-end"
+		echo "1: +90 degrees,  2: -90 degrees;  3: 180 degrees"
+		read ANGLE
+		if [ "$ANGLE" = 1 ]; then
+ 			AN="E"
+			AN2="90"
+	
+		elif [ "$ANGLE" = 2 ]; then
+ 			AN="W"
+			AN2="-90"
+	
+		elif [ "$ANGLE" = 3 ]; then
+ 			AN="S"
+			AN2="180"
+		fi
+	echo	
+	echo "Rotating all pages in $INFILE.pdf by $AN2 degrees. Output file: $INFILE.R.pdf"
+	
+	elif [ "$RANGE" = 2 ]; then
+		echo		
+		echo "Enter specific pdftk commands for rotation: " 		
+		echo "Ex: 2-3E 4-end "
+		echo "W=-90 deg;  E=90 deg;  S=180 deg"
+		echo		
+		read RAN
+
+		echo
+		echo Rotating pages in $INFILE.pdf Output file: $INFILE.R.pdf		 	
+	fi
+	
+	pdftk $INFILE.pdf cat $RAN$AN output $INFILE.R.pdf
+
+	echo Done!
+
+elif [ "$TYPE" = "10" ]; then
+	echo	
+	echo "Name input files (no extension):"
+	read INFILE
+	echo "Name output file (no extension): "
+	read OUTFILE
+	echo "Password: "
+	read PASS
+	echo
+	echo Adding password...
+	gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOwnerPassword=$PASS -sUserPassword=$PASS -sOUTPUTFILE=$OUTFILE $INFILE
+	echo "Done!"
+
+elif [ "$TYPE" = "11" ]; then
+	echo	
+	echo "Name input files (no extension):"
+	read INFILE
+	echo
+	echo Splitting PDF in single pages...
+	pdftk $INFILE.pdf burst output $INFILE.p%02d.pdf
+	echo "Done!"
+
+elif [ "$TYPE" = "12" ]; then
+	echo
+	echo "The image file names have to be labeled progressively."
+	echo "For example: 1.jpg, 2. jpg, etc..."
+	echo 	
+	echo "Images extension:"
+	read EXT
+	echo "Final resolution (suggested: 150dpi):"
+	read RES
+	echo "Name output file (no extension):"
+	read OUTFILE
+	echo 
+	echo Joining image files into $OUTFILE.pdf at $RES dpi
+	gm convert *.$EXT -resample $RES x $RES -adjoin $OUTFILE.pdf
+	echo Done!
+
+elif [ "$TYPE" = "13" ]; then
+	echo
+	echo "Name input file (no extension):"
+	read INFILE
+	echo "Would you like to add a password to open the file (1: NO, 2: YES)"
+	read TYPE2
+	if [ "$TYPE2" = 2 ]; then
+ 		echo "Enter the password: "
+		read PASS;
+		echo	
+		echo "Encrypting $INFILE.pdf into $INFILE.encrypt.pdf (Password protected)" 
+		pdftk $INFILE.pdf output $INFILE.encrp.pdf owner_pw foo user_pw $PASS
+	elif [ "$TYPE2" = 1 ]; then
+		echo "Encrypting $INFILE.pdf into $INFILE.encrypt.pdf"
+		pdftk $INFILE.pdf output $INFILE.encr.pdf owner_pw foo
+		echo	
+	fi
+	echo
+	echo "Done!"
+
+
+elif [ "$TYPE" = "14" ]; then
+	echo	
+	echo "Handlepdf - version 0.12.1 - 05/18/2010"
+	echo "Bugs, comments, suggestions: Nicola Ferralis <feranick@hotmail.com>"
+	echo "Handlepdf is licensed under the GNU Public License v.3"
+	echo 
+	echo "This program requires Ghostscript, pdftk and graphicsmagick."
+	echo
+
+fi
+
