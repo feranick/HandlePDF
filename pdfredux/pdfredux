@@ -1,0 +1,46 @@
+#!/bin/bash
+# By Nicola Ferralis - 20140413
+
+if [ "$1" = "" -o "$1" = "-h" ]; then
+	echo
+	echo " PDFredux v.20140413"
+	echo " Usage: pdfredux filename (with extension)"
+	echo
+else
+    if [ "$1" = "-v" ]; then
+        echo
+        echo "Pdfredux: v. 05082012"
+        echo "Nicola Ferralis <feranick@hotmail.com>" 
+        echo
+    else
+    
+
+	if [ -f $1 ]; then
+
+	base=$(basename $1 .pdf)
+
+	if [ "$2" = "-o" ]; then
+            echo
+            echo " Optimizing \"$1\" into \"$base.opt.pdf\"..."
+            #pdfopt $1.pdf $1.opt.pdf
+            pdfopt $1 $base.opt.pdf
+            echo " Done." 
+            echo
+
+        else
+            echo
+            echo " Reducing size of \"$1\" into \"\"$base.red.pdf..."
+            #gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOUTPUTFILE=$1.red.pdf $1.pdf
+            gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOUTPUTFILE=$base.red.pdf  $1
+	    echo " Done." 
+            echo			
+		fi
+	else
+		echo
+		echo " File \"$1\" does NOT exists."
+		echo
+
+    fi
+	fi
+fi
+
