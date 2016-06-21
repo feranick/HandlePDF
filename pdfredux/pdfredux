@@ -1,15 +1,17 @@
 #!/bin/bash
-# By Nicola Ferralis - 20140413
+# By Nicola Ferralis - 20160620
+
+version=20160620
 
 if [ "$1" = "" -o "$1" = "-h" ]; then
 	echo
-	echo " PDFredux v.20140413"
+	echo " PDFredux v."$version
 	echo " Usage: pdfredux filename (with extension)"
 	echo
 else
     if [ "$1" = "-v" ]; then
         echo
-        echo "Pdfredux: v. 05082012"
+        echo "Pdfredux: v."$version
         echo "Nicola Ferralis <feranick@hotmail.com>" 
         echo
     else
@@ -29,7 +31,7 @@ else
 
         else
             echo
-            echo " Reducing size of \"$1\" into \"\"$base.red.pdf..."
+            echo " Reducing size of \"$1\" into \"$base.red.pdf\"..."
             #gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOUTPUTFILE=$1.red.pdf $1.pdf
             gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOUTPUTFILE=$base.red.pdf  $1
 	    echo " Done." 
