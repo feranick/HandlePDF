@@ -1,5 +1,11 @@
 #!/bin/bash
-# By Nicola Ferralis - 20160629a
+# 
+# pdfredux - a script to reduce size and optimize PDFs
+#
+# By Nicola Ferralis <feranick@hotmail.com>
+# 
+# This is script is licensed throughthe GNU Public license v.2.0
+#
 
 version=20160629a
 
@@ -8,9 +14,6 @@ if [ "$1" = "" -o "$1" = "-h" ]; then
 	echo " PDFredux v."$version
 	echo " Usage:"
 	echo " 	pdfredux <filename (with extension)>"
-	echo
-	echo " For file optimization:"
-	echo "  pdfredux <filename (with extension)> -o "
 	echo
 else
     if [ "$1" = "-v" ]; then

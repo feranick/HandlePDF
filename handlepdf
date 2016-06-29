@@ -1,15 +1,24 @@
 #!/bin/bash
-# By Nicola Ferralis - 05082010
+# 
+# Handlepdf - a script to optimize and handle PDFs
+#
+# By Nicola Ferralis <feranick@hotmail.com>
+# 
+# This is script is licensed throughthe GNU Public license v.2.0
+#
+
+version="20160629a"
+
 echo
 echo "Manipulate multiple PDF files"
 echo
 echo "1. Merge PDF files		2. Add files to a PDF"	
 echo "3. Extract pages from PDF 	4. Save as jpg"
 echo "5. Convert PDF to Grayscale	6. Reduce size PDF"
-echo "7. Optimize PDF			8. Custom gs device"
-echo "9. Rotate PDF			10. Add password to pdf"
-echo "11. Split PDF in single pages	12. Convert images into pdf"
-echo "13. Encrypt and protect		14. About"
+echo "7. Custom gs device 		8: Rotate PDF"
+echo "9. Add password to pdf		10: Split PDF in single pages"
+echo "11. Convert images into pdf	12: Encrypt and protect"
+echo "13. About"
 echo
 echo "0. Exit"
 
@@ -123,31 +132,6 @@ elif [ "$TYPE" = "6" ]; then
 	echo Done!
 
 elif [ "$TYPE" = "7" ]; then
-	echo	
-	echo "Manual (1) or Automatic (2)"
-	read TYPE2
-	if [ "$TYPE2" = "1" ]; then
-		echo "Name input file (no extension):"
-		read INFILE
-		echo
-		echo Optimizing $INFILE.pdf into $INFILE.opt.pdf
-		pdfopt $INFILE.pdf $INFILE.opt.pdf
-
-	elif [ "$TYPE2" = "2" ]; then		
-		pathfiles=./
-		for i in $( ls $pathfiles );
-		do
-		if [ "${i##*.}" = "pdf" ]; then
-		tmp=$(echo $i | sed s/pdf/opt.pdf/g)
-		echo Optimizing $i into $tmp
-		pdfopt $i $tmp	
-		fi
-		done
-	fi
-	echo Done!
-
-
-elif [ "$TYPE" = "8" ]; then
 	echo
 	echo "Would you like to see the available gs devices? (1: yes  else: no)"
 	read TYPE2
@@ -169,7 +153,7 @@ elif [ "$TYPE" = "8" ]; then
 	echo Done!
 
 
-elif [ "$TYPE" = "9" ]; then
+elif [ "$TYPE" = "8" ]; then
 	echo
 	echo "Name input file (no extension):"
 	read INFILE
@@ -210,7 +194,7 @@ elif [ "$TYPE" = "9" ]; then
 
 	echo Done!
 
-elif [ "$TYPE" = "10" ]; then
+elif [ "$TYPE" = "9" ]; then
 	echo	
 	echo "Name input files (no extension):"
 	read INFILE
@@ -223,7 +207,7 @@ elif [ "$TYPE" = "10" ]; then
 	gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOwnerPassword=$PASS -sUserPassword=$PASS -sOUTPUTFILE=$OUTFILE $INFILE
 	echo "Done!"
 
-elif [ "$TYPE" = "11" ]; then
+elif [ "$TYPE" = "10" ]; then
 	echo	
 	echo "Name input files (no extension):"
 	read INFILE
@@ -232,7 +216,7 @@ elif [ "$TYPE" = "11" ]; then
 	pdftk $INFILE.pdf burst output $INFILE.p%02d.pdf
 	echo "Done!"
 
-elif [ "$TYPE" = "12" ]; then
+elif [ "$TYPE" = "11" ]; then
 	echo
 	echo "The image file names have to be labeled progressively."
 	echo "For example: 1.jpg, 2. jpg, etc..."
@@ -248,7 +232,7 @@ elif [ "$TYPE" = "12" ]; then
 	gm convert *.$EXT -resample $RES x $RES -adjoin $OUTFILE.pdf
 	echo Done!
 
-elif [ "$TYPE" = "13" ]; then
+elif [ "$TYPE" = "12" ]; then
 	echo
 	echo "Name input file (no extension):"
 	read INFILE
@@ -269,9 +253,9 @@ elif [ "$TYPE" = "13" ]; then
 	echo "Done!"
 
 
-elif [ "$TYPE" = "14" ]; then
+elif [ "$TYPE" = "13" ]; then
 	echo	
-	echo "Handlepdf - version 0.12.1 - 05/18/2010"
+	echo "Handlepdf - version:" $version
 	echo "Bugs, comments, suggestions: Nicola Ferralis <feranick@hotmail.com>"
 	echo "Handlepdf is licensed under the GNU Public License v.3"
 	echo 

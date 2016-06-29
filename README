@@ -1,0 +1,15 @@
+README
+------
+(Last updated June 29th, 2016)
+
+1. Handlepdf: Easy command line frontend for ghostscript.
+  - (merge, extract, optimize, reduce size, convert into image, add password, rotate, encrypt, convert to grayscale).
+  - Join imagee files into one pdf, useful to reduce native pdf image size in xsane (LP #75384)..
+
+2. pdfredux: optimizes and reduces size of PDFs
+
+3. Contact 
+
+Nicola Ferralis <feranick@hotmail.com>
+
+
