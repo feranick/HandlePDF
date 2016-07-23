@@ -7,7 +7,7 @@
 # This is script is licensed throughthe GNU Public license v.2.0
 #
 
-version="20160723a"
+version="20160723b"
 
 echo
 echo "Manipulate multiple PDF files"
@@ -123,7 +123,9 @@ elif [ "$TYPE" = "6" ]; then
 		for i in $( ls $pathfiles );
 		do
 		if [ "${i##*.}" = "pdf" ]; then
-		tmp=$(echo $i | sed s/pdf/red.pdf/g)
+		base=$(basename $i .pdf)
+		tmp=$(echo $base-red.pdf)
+		#tmp=$(echo $i | sed s/pdf/red.pdf/g)
 		echo Reducing size of $i into $tmp
 		gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOUTPUTFILE=$tmp $i	
 		fi
