@@ -8,8 +8,11 @@ README
 
 2. pdfredux: optimizes and reduces size of PDFs
 
-3. Contact 
+3. Requires qpdf, ImageMagick, Ghostscript
 
+4. Website: https://github.com/feranick/HandlePDF
+
+5. Contact 
 Nicola Ferralis <feranick@hotmail.com>
 
 
