@@ -1,4 +1,12 @@
-handlepdf (20200906a-0~bionic4) bionic; urgency=medium
+handlepdf (20200907b-0~bionic1) bionic; urgency=medium
+
+  * New upstream release:
+    - Replaced dependencies on pdftk with qpdf, gs, imagemagick
+  * Added explicit dependencies in debian package
+
+ -- Nicola Ferralis <feranick@hotmail.com>  Mon, 07 Sep 2020 17:56:15 -0400
+
+handlepdf (20200907a-0~focal1) focal; urgency=medium
 
   * New upstream release
 

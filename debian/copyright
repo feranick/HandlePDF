@@ -3,8 +3,7 @@ Upstream-Name: handlepdf
 Source: <https://github.com/feranick/HandlePDF>
 
 Files: *
-Copyright: 2014-2020 Nicola Ferralis <feranick@hotmail.com>
-           
+Copyright: 2014-2020 Nicola Ferralis <feranick@hotmail.com>           
 License:  GPL-2
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU General Public License as published by
