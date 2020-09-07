@@ -1,0 +1,23 @@
+Source: handlepdf
+Section: unknown
+Priority: optional
+Maintainer: Nicola <feranick@hotmail.com>
+Build-Depends: debhelper (>= 10)
+Standards-Version: 4.1.2
+Homepage: <https://github.com/feranick/HandlePDF>
+#Vcs-Git: https://anonscm.debian.org/git/collab-maint/handlepdf.git
+#Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/handlepdf.git
+
+Package: handlepdf
+Architecture: all
+Depends: ${misc:Depends}
+Description: Handle pdf mannipulation operations
+ Easy command line frontend for ghostscript and pdftk.
+ Merge, extract, optimize, reduce size, convert into and 
+ from images, convert to grayscale, add password, encrypt
+
+Package: pdfredux
+Architecture: all
+Depends: ${misc:Depends}
+Description: Reduces size of pdf                                                                                           
+ Easy command line frontend for ghostscript and pdftk.

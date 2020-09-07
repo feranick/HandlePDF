@@ -1,6 +1,5 @@
-README
-------
-(Last updated 2020/09/06)
+handlepdf for Debian
+-------------------
 
 1. Handlepdf: Easy command line frontend for ghostscript.
   - (merge, extract, optimize, reduce size, convert into image, add password, rotate, encrypt, convert to grayscale).
@@ -8,8 +7,7 @@ README
 
 2. pdfredux: optimizes and reduces size of PDFs
 
-3. Contact 
+Website: https://github.com/feranick/HandlePDF
 
-Nicola Ferralis <feranick@hotmail.com>
-
+ -- Nicola <nicola@bomboloni.mit.edu>  Mon, 07 Sep 2020 11:59:12 -0400
 
