@@ -1,8 +1,6 @@
 handlepdf (20200906a-0~bionic4) bionic; urgency=medium
 
   * New upstream release
-  - Bug fixes
-  - PDFredux: reduces size of PDF
 
  -- Nicola Ferralis <feranick@hotmail.com>  Sun, 06 Sep 2020 22:04:12 -0400
 

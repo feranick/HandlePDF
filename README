@@ -1,6 +1,6 @@
 README
 ------
-(Last updated 2020/09/06)
+(Last updated 2020/09/07)
 
 1. Handlepdf: Easy command line frontend for ghostscript.
   - (merge, extract, optimize, reduce size, convert into image, add password, rotate, encrypt, convert to grayscale).
