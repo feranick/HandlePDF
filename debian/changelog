@@ -1,3 +1,10 @@
+handlepdf (20210224a-0~focal1) focal; urgency=medium
+
+  * New upstream release:
+    - New option to convert single images into single pdfs
+
+ -- Nicola Ferralis <feranick@hotmail.com>  Wed, 23 Feb 2021 11:56:15 -0400
+
 handlepdf (20200907b-0~bionic1) bionic; urgency=medium
 
   * New upstream release:

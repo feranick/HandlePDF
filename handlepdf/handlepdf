@@ -7,7 +7,7 @@
 # This is script is licensed throughthe GNU Public license v.2.0
 #
 
-version="20200907b"
+version="20210224a"
 
 echo
 echo "Manipulate multiple PDF files"
@@ -17,8 +17,8 @@ echo "3. Extract pages from PDF 	4. Save as jpg"
 echo "5. Convert PDF to Grayscale	6. Reduce size PDF"
 echo "7. Custom gs device 		8: Rotate PDF"
 echo "9. Add password to pdf		10: Split PDF in single pages"
-echo "11. Convert images into pdf	12: Encrypt and protect"
-echo "13. About"
+echo "11. Images into single pdf	12: Encrypt and protect"
+echo "13. Images to multiple pdf	14. About"
 echo
 echo "0. Exit"
 
@@ -220,15 +220,22 @@ elif [ "$TYPE" = "12" ]; then
 	echo
 	echo "Name input file (no extension):"
 	read INFILE
-    echo "Enter password:"
-    read PASS
-    echo "Encrypting $INFILE.pdf into $INFILE.encrypt.pdf (Password protected)"
-    qpdf --encrypt $PASS foo 256 -- $INFILE.pdf $INFILE.encrypt.pdf
+        echo "Enter password:"
+        read PASS
+        echo "Encrypting $INFILE.pdf into $INFILE.encrypt.pdf (Password protected)"
+        qpdf --encrypt $PASS foo 256 -- $INFILE.pdf $INFILE.encrypt.pdf
 	echo
 	echo "Done!"
 
-
 elif [ "$TYPE" = "13" ]; then
+        echo "Images extension:"
+        read EXT
+	echo "Converting image $EXT files into pdf"
+        for file in *.$EXT ; do convert "$file" "${file/%$EXT/pdf}"; done    	
+        echo Done!
+
+
+elif [ "$TYPE" = "14" ]; then
 	echo	
 	echo "Handlepdf - version:" $version
 	echo "Bugs, comments, suggestions: Nicola Ferralis <feranick@hotmail.com>"
