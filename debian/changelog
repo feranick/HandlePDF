@@ -1,4 +1,11 @@
-handlepdf (20210224a-0~focal1) focal; urgency=medium
+handlepdf (20210408a-0~focal1) focal; urgency=medium
+
+  * New upstream release:
+    - Fixed issues in converting images to png (option 11).
+
+ -- Nicola Ferralis <feranick@hotmail.com>  Thu, 08 Apr 2021 17:03:56 -0400
+
+handlepdf (20210224a-0~bionic1) bionic; urgency=medium
 
   * New upstream release:
     - New option to convert single images into single pdfs
