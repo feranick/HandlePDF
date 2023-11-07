@@ -1,3 +1,23 @@
+handlepdf (20231107a-0~jammy1) jammy; urgency=medium
+
+  * New upstream release:
+    - Improved PDF compression
+
+ -- Nicola Ferralis <feranick@hotmail.com>  Tue, 07 Nov 2023 15:52:27 -0500
+
+handlepdf (20220516-0~jammy2) jammy; urgency=medium
+
+  * Specify dependence on libqpdf-dev for accurate call of qdf library
+  * Backport to Jammy
+
+ -- Nicola Ferralis <feranick@hotmail.com>  Tue, 04 Oct 2022 18:00:30 -0400
+
+handlepdf (20220516-0~focal1) focal; urgency=medium
+
+  * Cleanup of debian folder
+
+ -- Nicola Ferralis <feranick@hotmail.com>  Mon, 16 May 2022 12:07:40 -0400
+
 handlepdf (20210408b-0~focal1) focal; urgency=medium
 
   * New upstream release:

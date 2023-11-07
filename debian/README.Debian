@@ -1,6 +1,6 @@
 handlepdf for Debian
 -------------------
 
- Repackaged for compatibility of debhelper >=10
+ Repackaged for compatibility of debhelper >=12
 
- -- Nicola Ferralis <feranick@hotmail.com>  Mon, 07 Sep 2020 11:59:12 -0400
+ -- Nicola Ferralis <feranick@hotmail.com>  Mon, 16 May 2022 11:59:12 -0400

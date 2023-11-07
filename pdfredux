@@ -7,7 +7,7 @@
 # This is script is licensed throughthe GNU Public license v.2.0
 #
 
-version='20200907b'
+version='20231107a'
 
 if [ "$1" = "" -o "$1" = "-h" ]; then
 	echo
@@ -28,7 +28,9 @@ else
            echo " Reducing size of \"$1\" into \"$base-red.pdf\"..."
            #gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOUTPUTFILE=$1-red.pdf $1.pdf
            #gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dFastWebView -sOUTPUTFILE=$base-red.pdf  $1
-	   gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/ebook -sOUTPUTFILE=$base-red.pdf  $1
+	   gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -dPDFSETTINGS=/ebook -sOUTPUTFILE=$base-tmp.pdf $1
+       	   qpdf --compress-streams=y --object-streams=generate $base-tmp.pdf $base-red.pdf
+           rm $base-tmp.pdf
 	   echo " Done." 		
 	else
 	   echo " File \"$1\" does NOT exists."
